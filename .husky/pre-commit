@@ -1,4 +1,27 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+#!/usr/bin/env node
 
-npm run validate-branch
+const { execSync } = require('child_process');
+
+const validateBranchName = () => {
+  try {
+    const branchName = execSync('git rev-parse --abbrev-ref HEAD')
+      .toString()
+      .trim();
+    const branchRegex =
+      /^(main|development|master|(features|tests|(bug|hot)fix)(\/[a-zA-Z0-9]+([-_][a-zA-Z0-9]+)*){1,2}|release\/[0-9]+(\.[0-9]+)*(-(alpha|beta|rc)[0-9]*)?)$/;
+
+    console.log(branchName);
+    console.log(branchRegex.test(branchName));
+    if (!branchRegex.test(branchName)) {
+      console.error('Error: Invalid branch name format.');
+      process.exit(1);
+    } else {
+      console.log('Branch name is valid:', branchName);
+    }
+  } catch (error) {
+    console.error('Error occurred:', error);
+    process.exit(1);
+  }
+};
+
+validateBranchName();
