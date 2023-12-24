@@ -5,8 +5,11 @@ const validateBranchName = () => {
     const branchName = execSync('git rev-parse --abbrev-ref HEAD')
       .toString()
       .trim();
-    const branchRegex = /^(feature|bugfix|hotfix)\/[a-z0-9-]+$/;
+    const branchRegex =
+      /^(main|development|master|(features|tests|(bug|hot)fix)(\/[a-zA-Z0-9]+([-_][a-zA-Z0-9]+)*){1,2}|release\/[0-9]+(\.[0-9]+)*(-(alpha|beta|rc)[0-9]*)?)$/;
 
+    console.log(branchName);
+    console.log(branchRegex.test(branchName));
     if (!branchRegex.test(branchName)) {
       console.error('Error: Invalid branch name format.');
       process.exit(1);

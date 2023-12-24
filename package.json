@@ -19,13 +19,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prepare": "husky install",
-    "validate-branch": "node ./hooks/validate-branch.js"
+    "validate-branch": "node ./src/common/hooks/validate-branch.js"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm validate-branch"
-    }
-  },
+  "husky": {},
   "dependencies": {
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
