@@ -2,4 +2,5 @@
 const fs = require("fs")
 
 const commitmsgfile = process.argv[2];
-console.log(fs.readFileSync(commitmsgfile))
+const msg = fs.readFileSync(commitmsgfile,"utf8")
+console.log(msg)
