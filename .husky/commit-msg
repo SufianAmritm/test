@@ -1,4 +1,5 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+#!/usr/bin/env node
+const fs = require("fs")
 
-npm run commit-msg
+const commitmsgfile = process.argv[2];
+console.log(fs.readFileSync(commitmsgfile))
