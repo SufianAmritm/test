@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 const fs = require("fs")
-
-const commitmsgfile = process.argv[2];
-const msg = fs.readFileSync(commitmsgfile,"utf8")
+const {execSync} = require("child_process")
+const commitMsgFile = process.argv[2];
+const branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim()
+const msg = fs.readFileSync(commitMsgFile,"utf8")
+fs.writeFileSync(process.argv[2],`${branch}: msg`)
 console.log(msg)
